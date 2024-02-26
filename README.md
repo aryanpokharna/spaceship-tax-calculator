@@ -2,10 +2,11 @@
 This program enables you to connect to Spaceship (Managed Fund) Australia's API, pull transaction history and calculate capital gains tax for each FY. Developed locally in Sydney, Australia.
 
 # Set-up
-- Pull Git Repo.
-- Install the python requests library
-- Add credentials
-- Run main.py
+- Pull git repository to your local device.
+- (Optional) Create a virtual environment.
+- Run `pip install -r requirements.txt` to install dependencies.
+- Include credentials (email/password) to main.py
+- Run `python3 main.py`
 
 # Execution
 - Program will ask if you want to pull transaction data from Spaceship.
