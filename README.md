@@ -19,3 +19,5 @@ This program enables you to connect to Spaceship (Managed Fund) Australia's API,
 - Enhancing the security of credential storage.
 - Better error handling.
 - Supporting multiple portfolios.
+
+_Last updated: 26 February 2024_
