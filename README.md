@@ -5,7 +5,7 @@ This program enables you to connect to Spaceship (Managed Fund) Australia's API,
 - Pull git repository to your local device.
 - (Optional) Create a virtual environment.
 - Run `pip install -r requirements.txt` to install dependencies.
-- Include credentials (email/password) to main.py
+- Add credentials (email/password) to main.py
 - Run `python3 main.py`
 
 # Execution
