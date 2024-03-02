@@ -3,3 +3,10 @@ env/
 
 # Ignore pulled financial data
 *.json
+
+# Other
+draft.py
+transaction_report.txt
+
+# Ignore macOS .DS_Store files
+.DS_Store

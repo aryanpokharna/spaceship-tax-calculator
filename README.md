@@ -15,7 +15,7 @@ This program enables you to connect to Spaceship (Managed Fund) Australia's API,
 # Feedback
 - Please leave feedback in "Issues" tab. This project is a work in progress and I appreciate any/all feedback to improve its usability.
 
-# Future Updates
+# Potential Updates
 - Functionality to pull daily unit price/daily account balance.
 - Enhancing the security of credential storage.
 - Better error handling.
