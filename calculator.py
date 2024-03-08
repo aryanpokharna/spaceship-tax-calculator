@@ -33,7 +33,6 @@ def organise():
 
     allApplications = []
     allRedemptions = []
-    allReferrals = []
     allFees = []
       
     for t in transactions:
@@ -48,10 +47,10 @@ def organise():
             allRedemptions.append(t)
 
         if t["__typename"] == "Referral":
-            allReferrals.append(t)
+            allApplications.append(t)
 
         if t["__typename"] == "AccountFee":
-            allFees.append(t)
+            allRedemptions.append(t)
                 
     return allApplications, allRedemptions
 
@@ -94,14 +93,14 @@ def taxCalculator(allA, allR):
             FY24.append(transaction)
         
         # Counter
-        oldestBuyUnits = 0
+        oldestBuyUnits = float(0)
         oldestBuy = None
 
         while sell.qty > oldestBuyUnits:
 
             # Object(s): BUY
             buy = Buy()
-            oldestBuy = allA.pop()            
+            oldestBuy = allA.pop()      
             buy.date = date(oldestBuy)
             buy.unit = float(oldestBuy['unitExchange']['unitPrice']['price'])
             buy.qty = float(oldestBuy['unitExchange']['units'])
@@ -119,12 +118,15 @@ def taxCalculator(allA, allR):
                 buy.qty = sell.qty - oldestBuyUnits
                 buy.total = total
 
+            # P&L
+            if oldestSell["__typename"] != "AccountFee":
+                buy.pl = (sell.unit - buy.unit) * buy.qty
+            else:
+                buy.pl = -buy.total
+            transaction.pl += buy.pl
+
             # Increment Total Buy Counter
             oldestBuyUnits += buy.qty
-
-            # P&L
-            buy.pl = (sell.unit - buy.unit) * buy.qty
-            transaction.pl += buy.pl 
 
             # CGT Discount
             if (sell.date - buy.date).days > 366: 
@@ -150,7 +152,7 @@ def report(FY_array):
             file.write("\n")
             file.write("FY" + str(19 + i) + "\n")
             file.write(breaker)
-            file.write("{:<11}|{:5}|{:10}|{:9}|{:10}|{:8}|{:3}|{:8}\n".format("Date", "Type", " Quantity", "  Unit", "  Total", "  P/(L)", "CGT", "  P/(L)"))
+            file.write("{:<11}|{:5}|{:10}|{:9}|{:10}|{:8}|{:3}|{:8}\n".format("Date", "Type", " Quantity", "  Unit $", "  Total", "  P/(L)", "CGT", "  P/(L)"))
             for j, transaction in enumerate(transactions, start=1):
                 file.write(breaker)
                 sell = transaction.s
